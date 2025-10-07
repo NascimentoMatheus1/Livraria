@@ -1,28 +1,10 @@
-const container = document.getElementById('container');
+import Livro from "./Livro.js";
 const tbody = document.getElementById('tbody');
 const Livraria = [];
 
-function Livro (id, titulo, autor, paginas, lido) {
-    if(!new.target){
-        throw Error("You must use the 'new' operator to call the constructor");
-    }
-
-    this.id = id;
-    this.titulo = titulo;
-    this.autor = autor;
-    this.paginas = paginas;
-    this.lido = lido;
-}
-
-Livro.prototype.info =  function(){
-        return `${this.titulo} por ${this.autor}, ${this.paginas} paginas, ${this.lido}`
-}
-
 function addLivroParaLivraria(titulo, autor, paginas, lido){
     const uniqueId = crypto.randomUUID();
-        
     const novoLivro = new Livro(uniqueId, titulo, autor, paginas, lido);
-
     Livraria.push(novoLivro);
 }
 
@@ -50,3 +32,4 @@ addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
 addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
 addLivroParaLivraria('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 264, false);
 mostrarLivros();
+
