@@ -1,28 +1,34 @@
 import Livro from "./Livro.js";
-const tbody = document.getElementById('tbody');
 const Livraria = [];
+const container = document.getElementById('container');
 
-function addLivroParaLivraria(titulo, autor, paginas, lido){
+export default function addLivroParaLivraria(titulo, autor, paginas, lido){
     const uniqueId = crypto.randomUUID();
     const novoLivro = new Livro(uniqueId, titulo, autor, paginas, lido);
     Livraria.push(novoLivro);
 }
 
-function mostrarLivros(){
+export function mostrarLivros(){
     for(let livro of Livraria){
-        let lido = 'Não';
+        let lidoText = 'Não lido';
+        let lidoClass = 'btnNaoLido';
         if(livro.lido){
-            lido = 'Sim';
+            lidoClass = 'btnLido';
+            lidoText = 'Lido';
         }
-        const tr = document.createElement('tr');
+        const div = document.createElement('div');
+        div.classList.add('card');
+        div.dataset.livroId = livro.id;
         const dados = `
-                <td>${livro.titulo}</td>
-                <td>${livro.autor}</td>
-                <td>${livro.paginas}</td>
-                <td>${lido}</td>
+                <p class="titulo">${livro.titulo}</p>
+                <p>por <a href="#">${livro.autor}</a></p>
+                <p>${livro.paginas} páginas</p>
+                <p>lido: ${lidoText}</p>
+                <button class="${lidoClass}">${lidoText}</button>
+                <button class="btnRemover">Remover</button>
         `
-        tr.innerHTML = dados;
-        tbody.appendChild(tr);
+        div.innerHTML = dados;
+        container.appendChild(div);
     }
 }
 
@@ -30,6 +36,8 @@ addLivroParaLivraria('1984', 'George Orwell', 328, true);
 addLivroParaLivraria('Dom Casmurro', 'Machado de Assis', 240, false);
 addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
 addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
-addLivroParaLivraria('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 264, false);
+addLivroParaLivraria('Harry Potter', 'J.K. Rowling', 264, false);
+addLivroParaLivraria('Mais esperto que o Diabo', 'Napoleon Hill', 208, false);
 mostrarLivros();
+
 
