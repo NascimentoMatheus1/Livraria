@@ -13,6 +13,28 @@
         <h1>Livraria</h1>
     </header>
     <main>
+         <dialog id="AddDialog">
+            <p>Adicione um livro</p>
+            <form>
+                <input type="text" id="titulo" name="titulo" 
+                required placeholder="Titulo">
+
+                <input type="text" id="autor" name="autor" 
+                required placeholder="Autor">
+
+                <input type="number" id="pag" name="pag" 
+                min="1" max="10000" placeholder="Páginas">
+
+                <div class="checkbox-control">
+                    <label for="lido">Já foi lido?</label>
+                    <input type="checkbox" id="lido" name="lido">
+                </div>
+                <div class="dialog-actions">
+                    <button type="submit">Confirmar</button>
+                    <button id="cancel" type="reset">Cancelar</button>
+                </div>
+            </form>
+         </dialog>
         <button id="addLivro"> + Novo livro</button>
         <div id="container">
         </div>
