@@ -1,5 +1,5 @@
 import Livro from "./Livro.js";
-const Livraria = [];
+let Livraria = [];
 const container = document.getElementById('container');
 
 export function addLivroParaLivraria(titulo, autor, paginas, lido){
@@ -9,35 +9,54 @@ export function addLivroParaLivraria(titulo, autor, paginas, lido){
 }
 
 export function mostrarLivros(){
+    container.innerHTML = '';
     for(let livro of Livraria){
-        let lidoText = 'Não lido';
-        let lidoClass = 'btnNaoLido';
-        if(livro.lido){
-            lidoClass = 'btnLido';
-            lidoText = 'Lido';
-        }
-        const div = document.createElement('div');
-        div.classList.add('card');
-        div.dataset.livroId = livro.id;
-        const dados = `
-                <p class="titulo">${livro.titulo}</p>
-                <p>por <a href="#">${livro.autor}</a></p>
-                <p>${livro.paginas} páginas</p>
-                <p>lido: ${lidoText}</p>
-                <button class="${lidoClass}">${lidoText}</button>
-                <button class="btnRemover">Remover</button>
-        `
-        div.innerHTML = dados;
-        container.appendChild(div);
+        const card = criarCard(livro);
+        container.appendChild(card);
     }
 }
 
-// addLivroParaLivraria('1984', 'George Orwell', 328, true);
-// addLivroParaLivraria('Dom Casmurro', 'Machado de Assis', 240, false);
-// addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
-// addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
-// addLivroParaLivraria('Harry Potter', 'J.K. Rowling', 264, false);
-// addLivroParaLivraria('Mais esperto que o Diabo', 'Napoleon Hill', 208, false);
-// mostrarLivros();
+function criarCard(livro){
+    let lidoText = 'Não lido';
+    let lidoClass = 'btnNaoLido';
+    if(livro.lido){
+        lidoClass = 'btnLido';
+        lidoText = 'Lido';
+    }
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.dataset.livroId = livro.id;
+    const dados = `
+                <p class="titulo">${livro.titulo}</p>
+                <p>por <a href="#">${livro.autor}</a></p>
+                <p>${livro.paginas} páginas</p>
+                <button class="${lidoClass}">${lidoText}</button>
+    `
+    div.innerHTML = dados;
+    const btnRemover = document.createElement('button');
+    btnRemover.classList.add('btnRemover')
+    btnRemover.innerText = 'Remover';
+    btnRemover.addEventListener('click', (e) => {
+        e.preventDefault();
+        const parentElem = e.target.parentElement;
+        removerLivro(parentElem.dataset.livroId);
+    });
+    div.appendChild(btnRemover);
+
+    return div;
+}
+
+function removerLivro(id){
+    Livraria = Livraria.filter((livro) => livro.id !== id);
+    mostrarLivros();
+}
+
+addLivroParaLivraria('1984', 'George Orwell', 328, true);
+addLivroParaLivraria('Dom Casmurro', 'Machado de Assis', 240, false);
+addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
+addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
+addLivroParaLivraria('Harry Potter', 'J.K. Rowling', 264, false);
+addLivroParaLivraria('Mais esperto que o Diabo', 'Napoleon Hill', 208, false);
+mostrarLivros();
 
 
