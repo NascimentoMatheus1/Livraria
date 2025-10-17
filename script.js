@@ -2,7 +2,7 @@ import Livro from "./Livro.js";
 const Livraria = [];
 const container = document.getElementById('container');
 
-export default function addLivroParaLivraria(titulo, autor, paginas, lido){
+export function addLivroParaLivraria(titulo, autor, paginas, lido){
     const uniqueId = crypto.randomUUID();
     const novoLivro = new Livro(uniqueId, titulo, autor, paginas, lido);
     Livraria.push(novoLivro);
@@ -32,12 +32,12 @@ export function mostrarLivros(){
     }
 }
 
-addLivroParaLivraria('1984', 'George Orwell', 328, true);
-addLivroParaLivraria('Dom Casmurro', 'Machado de Assis', 240, false);
-addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
-addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
-addLivroParaLivraria('Harry Potter', 'J.K. Rowling', 264, false);
-addLivroParaLivraria('Mais esperto que o Diabo', 'Napoleon Hill', 208, false);
-mostrarLivros();
+// addLivroParaLivraria('1984', 'George Orwell', 328, true);
+// addLivroParaLivraria('Dom Casmurro', 'Machado de Assis', 240, false);
+// addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
+// addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
+// addLivroParaLivraria('Harry Potter', 'J.K. Rowling', 264, false);
+// addLivroParaLivraria('Mais esperto que o Diabo', 'Napoleon Hill', 208, false);
+// mostrarLivros();
 
 
