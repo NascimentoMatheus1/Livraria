@@ -4,7 +4,7 @@
 - Desenvolver uma aplicação web que permita gerenciar uma coleção de livros, com funcionalidades para adicionar, remover e alterar o status de leitura dos livros.
 
 ## Funcionalidades Requeridas:
-- Propiedades do objeto: autor, título, número de páginas, status de leitura.
+- Propriedades do objeto: autor, título, número de páginas, status de leitura.
 - Exibição dos Livros
 - Botão que abre formulário para adicionar novo livro
 - Usar dialog element para modal
