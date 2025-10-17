@@ -10,10 +10,3 @@ export default function Livro (id, titulo, autor, paginas, lido) {
     this.lido = lido;
 }
 
-Livro.prototype.toggleRead =  function(){
-    if(this.lido){
-        this.lido = false;
-    }else{
-        this.lido = true;
-    }
-}

@@ -1,15 +1,17 @@
 import Livro from "./Livro.js";
-let Livraria = [];
+let Livraria = getLivros();
 const container = document.getElementById('container');
 
 export function addLivroParaLivraria(titulo, autor, paginas, lido){
     const uniqueId = crypto.randomUUID();
     const novoLivro = new Livro(uniqueId, titulo, autor, paginas, lido);
     Livraria.push(novoLivro);
+    saveLivros();
 }
 
 export function mostrarLivros(){
     container.innerHTML = '';
+    saveLivros();
     for(let livro of Livraria){
         const card = criarCard(livro);
         container.appendChild(card);
@@ -41,7 +43,11 @@ function criarCard(livro){
         const parentElem = e.target.parentElement;
         const livriId = parentElem.dataset.livroId;
         const livro = Livraria.find((livro) => livro.id === livriId);
-        livro.toggleRead();
+        if(livro.lido){
+            livro.lido = false;
+        }else{
+            livro.lido = true;
+        }
         mostrarLivros();
     });
     div.appendChild(btnLido);
@@ -64,12 +70,13 @@ function removerLivro(id){
     mostrarLivros();
 }
 
-addLivroParaLivraria('1984', 'George Orwell', 328, true);
-addLivroParaLivraria('Dom Casmurro', 'Machado de Assis', 240, false);
-addLivroParaLivraria('Orgulho e Preconceito', 'Jane Austen', 424, true);
-addLivroParaLivraria('Duna', 'Frank Herbert', 704, false);
-addLivroParaLivraria('Harry Potter', 'J.K. Rowling', 264, false);
-addLivroParaLivraria('Mais esperto que o Diabo', 'Napoleon Hill', 208, false);
+function saveLivros(){
+    localStorage.setItem('Livraria', JSON.stringify(Livraria));
+}
+
+function getLivros(){
+    let key = localStorage.getItem('Livraria') || "[]";
+    return JSON.parse(key);
+}
+
 mostrarLivros();
-
-
