@@ -30,9 +30,22 @@ function criarCard(livro){
                 <p class="titulo">${livro.titulo}</p>
                 <p>por <a href="#">${livro.autor}</a></p>
                 <p>${livro.paginas} páginas</p>
-                <button class="${lidoClass}">${lidoText}</button>
     `
     div.innerHTML = dados;
+
+    const btnLido = document.createElement('button');
+    btnLido.classList.add(lidoClass)
+    btnLido.innerText = lidoText;
+    btnLido.addEventListener('click', (e) => {
+        e.preventDefault();
+        const parentElem = e.target.parentElement;
+        const livriId = parentElem.dataset.livroId;
+        const livro = Livraria.find((livro) => livro.id === livriId);
+        livro.toggleRead();
+        mostrarLivros();
+    });
+    div.appendChild(btnLido);
+
     const btnRemover = document.createElement('button');
     btnRemover.classList.add('btnRemover')
     btnRemover.innerText = 'Remover';
